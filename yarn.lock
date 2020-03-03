@@ -927,7 +927,7 @@
     "@babel/helper-plugin-utils" "^7.8.3"
     "@babel/plugin-transform-typescript" "^7.8.3"
 
-"@babel/runtime@7.8.4", "@babel/runtime@^7.0.0", "@babel/runtime@^7.3.4", "@babel/runtime@^7.4.5", "@babel/runtime@^7.5.1", "@babel/runtime@^7.6.2", "@babel/runtime@^7.6.3", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.3":
+"@babel/runtime@7.8.4", "@babel/runtime@^7.0.0", "@babel/runtime@^7.3.4", "@babel/runtime@^7.4.5", "@babel/runtime@^7.5.1", "@babel/runtime@^7.6.2", "@babel/runtime@^7.6.3", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.7", "@babel/runtime@^7.8.3":
   version "7.8.4"
   resolved "https://registry.npm.taobao.org/@babel/runtime/download/@babel/runtime-7.8.4.tgz?cache=0&sync_timestamp=1580387848686&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fruntime%2Fdownload%2F%40babel%2Fruntime-7.8.4.tgz#d79f5a2040f7caa24d53e563aad49cbc05581308"
   integrity sha1-159aIED3yqJNU+VjqtScvAVYEwg=
@@ -4819,6 +4819,13 @@ he@^1.2.0:
   version "1.2.0"
   resolved "https://registry.npm.taobao.org/he/download/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
   integrity sha1-hK5l+n6vsWX922FWauFLrwVmTw8=
+
+helper-js@^1.4.33:
+  version "1.4.33"
+  resolved "https://registry.npm.taobao.org/helper-js/download/helper-js-1.4.33.tgz#1a59b90f75a2aeaf6cccc7a586e533cd05e693b7"
+  integrity sha1-Glm5D3Wirq9szMelhuUzzQXmk7c=
+  dependencies:
+    "@babel/runtime" "^7.7.7"
 
 hex-color-regex@^1.1.0:
   version "1.1.0"

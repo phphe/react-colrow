@@ -1,0 +1,8 @@
+.cr-row{
+  width: 100%;
+  overflow: hidden;
+}
+.cr-row-inner{
+  display: flex;
+  flex-wrap: wrap;
+}
