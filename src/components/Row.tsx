@@ -25,6 +25,17 @@ export interface RowProps extends React.HTMLProps<HTMLElement> {
   heightCalculation?: boolean
   breakPoints?: typeof config.BREAK_POINTS
   children?: ReactNode
+  // responsive
+  xsGutterX?: number
+  xsGutterY?: number
+  smGutterX?: number
+  smGutterY?: number
+  mdGutterX?: number
+  mdGutterY?: number
+  lgGutterX?: number
+  lgGutterY?: number
+  xlGutterX?: number
+  xlGutterY?: number
 }
 
 const defaultProps = {
@@ -37,7 +48,8 @@ export default function Row(props: RowProps={}) {
     ...defaultProps,
     ...props,
   }
-  const {gutter, breakPoints} = props
+  const className = `cr-col-${hp.strRand(6)}`
+  const {gutter, breakPoints, xsGutterX, xsGutterY, smGutterX, smGutterY, mdGutterX, mdGutterY, lgGutterX, lgGutterY, xlGutterX, xlGutterY} = props
   // state
   const resolveGutterXY = () => {
     const t = Array.isArray(gutter) ? gutter.slice() : [gutter!, gutter!]
@@ -66,20 +78,48 @@ export default function Row(props: RowProps={}) {
   }
 
   // computed
-  const style = useMemo(() => {
-    const stl:any = {
-      marginRight: `-${gutterX}px`,
+  const styleText = useMemo(() => {
+    const baseStyleText = (argGutterX?: number, argGutterY?: number) => {
+      if (argGutterX == null) {
+        argGutterX = gutterX
+      }
+      if (argGutterY == null) {
+        argGutterY = gutterY
+      }
+      let styleText = `.${className}{\n`
+      styleText += `margin-right: -${argGutterX}px;`
+      if (innerHeight == null) {
+        styleText += `margin-bottom: -${argGutterY}px;`
+      } else if(innerHeight !== 0) {
+        styleText += `height: ${innerHeight - argGutterY}px;`
+      }
+      styleText += `}`
+      styleText += `.${className} > .cr-row-inner{
+        width: calc(100% + ${argGutterX}px);
+      }`
+      return styleText
     }
-    if (innerHeight == null) {
-      stl.marginBottom = `-${gutterY}px`
-    } else if(innerHeight !== 0) {
-      stl.height = `${innerHeight - gutterY}px`
+    let styleText = baseStyleText(gutterX, gutterY)
+    // responsive
+    const bp = breakPoints
+    if (xsGutterX != null || xsGutterY != null) {
+      styleText += `@media (max-width: ${bp!.xs}px) {${baseStyleText(xsGutterX, xsGutterY)}}`
     }
-    return stl
-  }, [gutterX, gutterY, innerHeight]);
-  const innerStyle = useMemo(() => ({
-    width: `calc(100% + ${gutterX}px)`,
-  }), [gutterX]);
+    if (smGutterX != null || smGutterY != null) {
+      styleText += `@media (min-width: ${bp!.xs}px) {${baseStyleText(smGutterX, smGutterY)}}`
+    }
+    if (mdGutterX != null || mdGutterY != null) {
+      styleText += `@media (min-width: ${bp!.sm}px) {${baseStyleText(mdGutterX, mdGutterY)}}`
+    }
+    if (lgGutterX != null || lgGutterY != null) {
+      styleText += `@media (min-width: ${bp!.md}px) {${baseStyleText(lgGutterX, lgGutterY)}}`
+    }
+    if (xlGutterX != null || xlGutterY != null) {
+      styleText += `@media (min-width: ${bp!.lg}px) {${baseStyleText(xlGutterX, xlGutterY)}}`
+    }
+    // 
+    return `<style type="text/css">${styleText}</style>`.replace(/\n/g, '')
+  }, [gutterX, gutterY, breakPoints, xsGutterX, xsGutterY, smGutterX, smGutterY, mdGutterX, mdGutterY, lgGutterX, lgGutterY, xlGutterX, xlGutterY, className, innerHeight]);
 
   // watch
   const updateGutterXY = () => {
@@ -123,11 +163,14 @@ export default function Row(props: RowProps={}) {
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   // render
-  return <RowContext.Provider value={{gutterX, gutterY, breakPoints}}>
-    <div className={`cr-row ${props.className||''}`} style={{...style, ...props.style}}>
-      <div className="cr-row-inner" ref={inner} style={innerStyle}>
+  // TODO can cr-row's style be passed in from outside?
+  return <RowContext.Provider value={{gutterX, gutterY, breakPoints, xsGutterX, xsGutterY, smGutterX, smGutterY, mdGutterX, mdGutterY, lgGutterX, lgGutterY, xlGutterX, xlGutterY}}>
+    <div className={`cr-row ${props.className||''} ${className}`}>
+      <div className="cr-row-inner" ref={inner}>
         {props.children}
       </div>
+      {/* styleText */}
+      <div className="cr-dynamic-style" style={{display:'none'}} dangerouslySetInnerHTML={{__html: styleText}}></div>
     </div>
   </RowContext.Provider>
 }

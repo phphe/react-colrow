@@ -36,105 +36,111 @@ export default function Row(props: ColProps={}) {
   }
   const className = `cr-col-${hp.strRand(6)}`
   const {width, grow, xs, xsGrow, sm, smGrow, md, mdGrow, lg, lgGrow, xl, xlGrow, colWidthReduce} = props
-  const {gutterX, gutterY, breakPoints} = useContext(RowContext)
+  const ctx = useContext(RowContext)
+  const {gutterX, gutterY, breakPoints, xsGutterX, xsGutterY, smGutterX, smGutterY, mdGutterX, mdGutterY, lgGutterX, lgGutterY, xlGutterX, xlGutterY} = ctx
 
   // computed 
   const styleText = useMemo(() => {
-    // convert width to css text
-    const widthText = (width: Width) => {
-      if (typeof width === 'number') {
-        if (width <= 1) {
-          const reduce = ifNeedReduceColWidth ? ` - ${colWidthReduce}px` : ''
-          return `calc(100% * ${width} - ${gutterX}px${reduce})` 
-        } else {
-          return `${width}px`
+    const baseStyleText = (width?:Width, grow?:Grow, gutterX?:number, gutterY?:number) => {
+      // convert width to css text
+      const widthText = (width?: Width, gutterX?:number) => {
+        if (width == null) {
+          width = props.width
         }
-      } else {
-        return width // such as 100px, 100em, 10cm
+        if (gutterX == null) {
+          gutterX = ctx.gutterX
+        }
+        if (typeof width === 'number') {
+          if (width <= 1) {
+            const reduce = ifNeedReduceColWidth ? ` - ${colWidthReduce}px` : ''
+            return `calc(100% * ${width} - ${gutterX}px${reduce})` 
+          } else {
+            return `${width}px`
+          }
+        } else {
+          return width // such as 100px, 100em, 10cm
+        }
       }
-    }
-    
-    let styleText = `.${className}{\n`
-    // margin
-    styleText += `
-      margin-right: ${gutterX}px;
-      margin-bottom: ${gutterY}px;
-    `
-    // base style
-    const widthAndGrow = (w?: Width, grow?: Grow) => {
-      let t = ''
-      if (w != null) {
-        t += `width: ${widthText(w)};`
+      let empty = true
+      const styles = []
+      if (gutterX != null) {
+        styles.push(`margin-right: ${gutterX}px;`)
+        empty = false
+      }
+      if (gutterY != null) {
+        styles.push(`margin-bottom: ${gutterY}px;`)
+        empty = false
+      }
+      if (width == null && grow) {
+        width = 2
+      }
+      if (width != null || gutterX != null) {
+        styles.push(`width: ${widthText(width, gutterX)};`)
+        empty = false
       }
       if (grow != null && grow !== false) {
         if (grow === true) {
           grow = 1
         }
-        t += `flex-grow: ${grow};`
+        styles.push(`flex-grow: ${grow};`)
+        empty = false
       }
-      return t
+      const style = `.${className}{${styles.join('')}}`
+      return {empty, style}
     }
+
+    let styleText = ``
     let w = width
-    if (w == null) {
-      w = grow != null && grow !== false ? 1.1 : 1
+    if (w == null && !grow) {
+      w = 1
     }
-    styleText += widthAndGrow(w, grow)
-    styleText += '}'
+    styleText += baseStyleText(w, grow, gutterX, gutterY).style
     // responsive
     const bp = breakPoints
-    const xsStyle = widthAndGrow(xs, xsGrow)
-    if (xsStyle) {
+    let t
+    t = baseStyleText(xs, xsGrow, xsGutterX, xsGutterY)
+    if (!t.empty) {
       styleText += `
         @media (max-width: ${bp!.xs}px) {
-          .${className}{
-            ${xsStyle}
-          }
+          ${t.style}
         }
       `
     }
-    const smStyle = widthAndGrow(sm, smGrow)
-    if (smStyle) {
+    t = baseStyleText(sm, smGrow, smGutterX, smGutterY)
+    if (!t.empty) {
       styleText += `
         @media (min-width: ${bp!.xs}px) {
-          .${className}{
-            ${smStyle}
-          }
+          ${t.style}
         }
       `
     }
-    const mdStyle = widthAndGrow(md, mdGrow)
-    if (mdStyle) {
+    t = baseStyleText(md, mdGrow, mdGutterX, mdGutterY)
+    if (!t.empty) {
       styleText += `
         @media (min-width: ${bp!.sm}px) {
-          .${className}{
-            ${mdStyle}
-          }
+          ${t.style}
         }
       `
     }
-    const lgStyle = widthAndGrow(lg, lgGrow)
-    if (lgStyle) {
+    t = baseStyleText(lg, lgGrow, lgGutterX, lgGutterY)
+    if (!t.empty) {
       styleText += `
         @media (min-width: ${bp!.md}px) {
-          .${className}{
-            ${lgStyle}
-          }
+          ${t.style}
         }
       `
     }
-    const xlStyle = widthAndGrow(xl, xlGrow)
-    if (xlStyle) {
+    t = baseStyleText(xl, xlGrow, xlGutterX, xlGutterY)
+    if (!t.empty) {
       styleText += `
         @media (min-width: ${bp!.lg}px) {
-          .${className}{
-            ${xlStyle}
-          }
+          ${t.style}
         }
       `
     }
     // 
     return `<style type="text/css">${styleText}</style>`.replace(/\n/g, '')
-  }, [width, grow, xs, xsGrow, sm, smGrow, md, mdGrow, lg, lgGrow, xl, xlGrow, colWidthReduce, gutterX, gutterY, breakPoints, className]);
+  }, [width, grow, xs, xsGrow, sm, smGrow, md, mdGrow, lg, lgGrow, xl, xlGrow, colWidthReduce, gutterX, gutterY, breakPoints, xsGutterX, xsGutterY, smGutterX, smGutterY, mdGutterX, mdGutterY, lgGutterX, lgGutterY, xlGutterX, xlGutterY, className, ctx.gutterX, props.width]);
 
   // render
   return <div className={`cr-col ${className} ${props.className||''}`}>
