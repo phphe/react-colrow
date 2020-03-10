@@ -1,8 +1,41 @@
 {
   "name": "react-colrow",
-  "version": "0.1.0",
-  "private": true,
+  "version": "2.0.0",
+  "description": "A draggable sortable nested vue tree component.",
+  "main": "dist/cjs/lib-entry.js",
+  "module": "dist/esm/lib-entry.js",
+  "files": ["dist", "types"],
+  "unpkg": "dist/umd-min/lib-entry.js",
+  "author": "phphe <phphe@outlook.com> (https://github.com/phphe)",
+  "bugs": {
+    "url": "https://github.com/phphe/react-colrow/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/phphe/react-colrow.git"
+  },
+  "license": "MIT",
   "dependencies": {
+    "@babel/runtime": "^7.8.7",
+    "helper-js": "^1.4.33"
+  },
+  "peerDependencies": {
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build:app": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "compile-scripts": "tsc --target ES6 --module CommonJS scripts/build.ts",
+    "build": "rollup -c scripts/build.js & node scripts/build.js --report"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.8.3",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -10,31 +43,10 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
-    "helper-js": "^1.4.33",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
     "react-scripts": "3.4.0",
+    "rogo": "^2.0.0",
+    "rollup-plugin-postcss": "^2.4.1",
+    "rollup-plugin-typescript2": "^0.26.0",
     "typescript": "~3.7.2"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   }
 }

@@ -143,7 +143,7 @@ export default function Row(props: ColProps={}) {
   }, [width, grow, xs, xsGrow, sm, smGrow, md, mdGrow, lg, lgGrow, xl, xlGrow, colWidthReduce, gutterX, gutterY, breakPoints, xsGutterX, xsGutterY, smGutterX, smGutterY, mdGutterX, mdGutterY, lgGutterX, lgGutterY, xlGutterX, xlGutterY, className, ctx.gutterX, props.width]);
 
   // render
-  return <div className={`cr-col ${className} ${props.className||''}`}>
+  return <div className={`cr-col ${className} ${props.className||''}`} style={props.style}>
     {props.children}
     {/* styleText */}
     <div className="cr-dynamic-style" style={{display:'none'}} dangerouslySetInnerHTML={{__html: styleText}}></div>

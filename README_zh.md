@@ -5,26 +5,26 @@ Smarter layout components. Based on css flexbox. Support responsive design, Type
 
 更智能的布局组件. 基于css flexbox. 支持响应式布局, Typescript, 服务端渲染. 5 KB gzipped. 
 
-Col's width can be fixed number, percentage or auto grow. Support responsive layout. Row has gutter to set column spacing. This libarary based on css flexbox, not js. So it support ssr(server side render).
+提供Col(列), Row(行), BreakRow(断行)3个布局组件. 其中Col的宽度支持指定数字, 百分比, 自动增长. 支持不同的屏幕宽度设定不一样的列宽. Row可以设置gutter(沟槽, 列间距). 本项目通过css flexbox实现, 而不是js, 所以不用等到组件挂载到DOM, 所以支持ssr(服务端渲染).
 
-I created [vue-colrow](https://github.com/phphe/vue-colrow) first. react-colrow is developed with Typescript, so I don’t want to write a repeat detailed document. If you want know more, you can refer to vue-colrow's documentation.
+我先开发的vue版本的[vue-colrow](https://github.com/phphe/vue-colrow/zh). react-colrow是之后用Typescript开发的. 所以不想再写一个重复的复杂文档. 如果你想了解更多, 可以参考vue-colrow的文档.
 
-## Usage
+## 使用
 ```js
 import {Row, Col, BreakRow, config} from 'react-colrow'
 ```
-css is included in js. Row, Col and BreakRow are components, `config` is [global config](https://vue-colrow.phphe.com/api.html#config). 
+css包含在js里, 无需引入. Row, Col and BreakRow 是组件, `config` 是 [全局配置](https://vue-colrow.phphe.com/zh/api.html#config). 
 
 ## Demo
-Follow screenshot images are from vue-colrow, but it also works with react-colrow.
+下面的截图来自vue-colrow, 使用本库效果是一样的.
 
 ![image](https://github.com/phphe/vue-colrow/blob/master/public/colrow-form.png?raw=true)
 
-In small screen: 
+小屏幕: 
 
 ![image](https://github.com/phphe/vue-colrow/blob/master/public/colrow-form-xs.png?raw=true)
 
-The code should be:
+代码应该是:
 ```html
 <Row>
   <Col width={300}><Card1 /></Col>
@@ -52,7 +52,7 @@ The code should be:
   </Col>
 </Row>
 ```
-## Demo 2: Responsive card list with gutter
+## Demo 2: 响应式带沟槽(列间距)的卡片列表
 ![image](https://github.com/phphe/vue-colrow/blob/master/public/colrow-list.png?raw=true)
 ```html
 <Row>
@@ -63,11 +63,11 @@ The code should be:
 </Row>
 ```
 
-## Related
-* [My blog](https://phphe.com)
-* [vue-colrow](https://vue-colrow.phphe.com)
-* [Responsive](https://vue-colrow.phphe.com/guide.html#responsive)
-* [CSS hack](https://vue-colrow.phphe.com/guide.html#css-hack)
+## 相关
+* [我的博客](https://phphe.com)
+* [vue-colrow](https://vue-colrow.phphe.com/zh) vue版本
+* [响应式](https://vue-colrow.phphe.com/zh/guide.html#响应式)
+* [CSS hack](https://vue-colrow.phphe.com/zh/guide.html#css-hack)
 
 ## License
 [MIT](http://opensource.org/licenses/MIT)

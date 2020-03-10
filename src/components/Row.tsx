@@ -64,7 +64,7 @@ export default function Row(props: RowProps={}) {
   const initialGutter = resolveGutterXY()
   const [gutterX, setgutterX] = useState(initialGutter[0]);
   const [gutterY, setgutterY] = useState(initialGutter[1]);
-  const [innerHeight, setinnerHeight] = useState();
+  const [innerHeight, setinnerHeight] = useState<number>();
   // ref
   const inner = useRef(null)
   const updateInnerHeight = () => {
@@ -163,9 +163,8 @@ export default function Row(props: RowProps={}) {
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   // render
-  // TODO can cr-row's style be passed in from outside?
   return <RowContext.Provider value={{gutterX, gutterY, breakPoints, xsGutterX, xsGutterY, smGutterX, smGutterY, mdGutterX, mdGutterY, lgGutterX, lgGutterY, xlGutterX, xlGutterY}}>
-    <div className={`cr-row ${props.className||''} ${className}`}>
+    <div className={`cr-row ${props.className||''} ${className}`} style={props.style}>
       <div className="cr-row-inner" ref={inner}>
         {props.children}
       </div>

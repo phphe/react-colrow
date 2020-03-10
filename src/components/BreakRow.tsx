@@ -62,7 +62,7 @@ export default function BreakRow(props: BreakRowProps={}) {
   }, [xs, sm, md, lg, xl, breakPoints, className]);
 
   // render
-  return <div className={`cr-break-row ${className} ${props.className||''}`}>
+  return <div className={`cr-break-row ${className} ${props.className||''}`} style={props.style}>
     {/* styleText */}
     <div className="cr-dynamic-style" style={{display:'none'}} dangerouslySetInnerHTML={{__html: styleText}}></div>
   </div>
