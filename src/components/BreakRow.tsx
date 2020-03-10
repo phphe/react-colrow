@@ -3,7 +3,7 @@ import "./BreakRow.css"
 import React, {useMemo, useContext} from 'react'
 import RowContext from "./RowContext";
 
-interface BreakRowProps extends React.HTMLProps<HTMLElement> {
+export interface BreakRowProps {
   xs?: boolean
   sm?: boolean
   md?: boolean
@@ -11,7 +11,7 @@ interface BreakRowProps extends React.HTMLProps<HTMLElement> {
   xl?: boolean
 }
 
-export default function BreakRow(props: BreakRowProps={}) {
+export default function BreakRow(props: BreakRowProps & React.HTMLProps<HTMLElement> = {}) {
   const className = `cr-break-row-${hp.strRand(6)}`
   const {xs, sm, md, lg, xl} = props
   const {breakPoints} = useContext(RowContext)

@@ -7,7 +7,7 @@ import RowContext from "./RowContext";
 
 type Width = number|string // default 1; default 1.1 if grow
 type Grow = boolean|number
-interface ColProps extends React.HTMLProps<HTMLElement>{
+export interface ColProps {
   width?: Width
   grow?: Grow
   // responsive
@@ -25,11 +25,11 @@ interface ColProps extends React.HTMLProps<HTMLElement>{
   children?: ReactNode
 }
 
-const defaultProps = {
+export const defaultProps = {
   colWidthReduce: config.COL_WIDTH_REDUCE
 }
 
-export default function Row(props: ColProps={}) {
+export default function Col(props: ColProps & React.HTMLProps<HTMLElement>={}) {
   props = {
     ...defaultProps,
     ...props,

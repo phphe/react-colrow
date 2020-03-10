@@ -20,7 +20,7 @@ export const config = {
   ROW_HEIGHT_CALCULATION: true,
 }
 
-export interface RowProps extends React.HTMLProps<HTMLElement> {
+export interface RowProps {
   gutter?: number|number[] // [x, y]
   heightCalculation?: boolean
   breakPoints?: typeof config.BREAK_POINTS
@@ -38,12 +38,13 @@ export interface RowProps extends React.HTMLProps<HTMLElement> {
   xlGutterY?: number
 }
 
-const defaultProps = {
+export const defaultProps = {
   gutter: [config.DEFAULT_GUTTER_X, config.DEFAULT_GUTTER_Y],
   heightCalculation: config.ROW_HEIGHT_CALCULATION,
   breakPoints: config.BREAK_POINTS,
 }
-export default function Row(props: RowProps={}) {
+
+export default function Row(props: RowProps & React.HTMLProps<HTMLElement>={}) {
   props = {
     ...defaultProps,
     ...props,
