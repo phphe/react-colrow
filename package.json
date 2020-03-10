@@ -1,6 +1,6 @@
 {
   "name": "react-colrow",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A draggable sortable nested vue tree component.",
   "main": "dist/cjs/lib-entry.js",
   "module": "dist/esm/lib-entry.js",
@@ -32,7 +32,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "compile-scripts": "tsc --target ES6 --module CommonJS scripts/build.ts",
-    "build": "rollup -c scripts/build.js & node scripts/build.js --report"
+    "build": "rollup -c scripts/build.js & node scripts/build.js --report",
+    "build:docs": "typedoc --inputFiles src/lib-entry.ts --excludeNotExported --excludePrivate --out docs --ignoreCompilerErrors --gaID UA-155723570-4"
   },
   "eslintConfig": {
     "extends": "react-app"
