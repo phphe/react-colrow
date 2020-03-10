@@ -1,7 +1,7 @@
 {
   "name": "react-colrow",
-  "version": "2.0.2",
-  "description": "A draggable sortable nested vue tree component.",
+  "version": "2.0.3",
+  "description": "Smarter react layout components. Based on css flexbox. Support responsive design, Typescript, server side render",
   "main": "dist/cjs/lib-entry.js",
   "module": "dist/esm/lib-entry.js",
   "files": [
