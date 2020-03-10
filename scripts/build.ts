@@ -55,7 +55,7 @@ export default <rollup.RollupOptions[]>[
   // esm
   {
     input,
-    external: (source) => belongsTo(source, Object.keys(pkg.dependencies)) || belongsTo(source, Object.keys(pkg.peerDependencies)),
+    external: (source) => belongsTo(source, Object.keys(pkg.dependencies||{})) || belongsTo(source, Object.keys(pkg.peerdependencies||{})),
     plugins: [
       postcss(),
       node(), cjs(), json(),  typescript(),
@@ -71,7 +71,7 @@ export default <rollup.RollupOptions[]>[
   // cjs
   {
     input,
-    external: (source) => belongsTo(source, Object.keys(pkg.dependencies)) || belongsTo(source, Object.keys(pkg.peerDependencies)),
+    external: (source) => belongsTo(source, Object.keys(pkg.dependencies||{})) || belongsTo(source, Object.keys(pkg.peerdependencies||{})),
     plugins: [
       postcss(),
       node(), cjs(), json(), typescript(),
@@ -87,7 +87,7 @@ export default <rollup.RollupOptions[]>[
   // // umd
   // {
   //   input,
-  //   external: (source) => belongsTo(source, Object.keys(pkg.peerDependencies)),
+  //   external: (source) => belongsTo(source, Object.keys(pkg.peerdependencies||{})),
   //   plugins: [
   //     node(), cjs(), json(), typescript(),
   //     babel(umdBabelConfig),
@@ -103,7 +103,7 @@ export default <rollup.RollupOptions[]>[
   // umd min
   {
     input,
-      external: (source) => belongsTo(source, Object.keys(pkg.peerDependencies)),
+      external: (source) => belongsTo(source, Object.keys(pkg.peerdependencies||{})),
     plugins: [
       postcss(),
       node(), cjs(), json(), typescript(),

@@ -49,7 +49,7 @@ exports.default = [
     // esm
     {
         input,
-        external: (source) => rogo_1.belongsTo(source, Object.keys(pkg.dependencies)) || rogo_1.belongsTo(source, Object.keys(pkg.peerDependencies)),
+        external: (source) => rogo_1.belongsTo(source, Object.keys(pkg.dependencies || {})) || rogo_1.belongsTo(source, Object.keys(pkg.peerdependencies || {})),
         plugins: [
             postcss(),
             node(), cjs(), json(), typescript(),
@@ -65,7 +65,7 @@ exports.default = [
     // cjs
     {
         input,
-        external: (source) => rogo_1.belongsTo(source, Object.keys(pkg.dependencies)) || rogo_1.belongsTo(source, Object.keys(pkg.peerDependencies)),
+        external: (source) => rogo_1.belongsTo(source, Object.keys(pkg.dependencies || {})) || rogo_1.belongsTo(source, Object.keys(pkg.peerdependencies || {})),
         plugins: [
             postcss(),
             node(), cjs(), json(), typescript(),
@@ -81,7 +81,7 @@ exports.default = [
     // // umd
     // {
     //   input,
-    //   external: (source) => belongsTo(source, Object.keys(pkg.peerDependencies)),
+    //   external: (source) => belongsTo(source, Object.keys(pkg.peerdependencies||{})),
     //   plugins: [
     //     node(), cjs(), json(), typescript(),
     //     babel(umdBabelConfig),
@@ -97,7 +97,7 @@ exports.default = [
     // umd min
     {
         input,
-        external: (source) => rogo_1.belongsTo(source, Object.keys(pkg.peerDependencies)),
+        external: (source) => rogo_1.belongsTo(source, Object.keys(pkg.peerdependencies || {})),
         plugins: [
             postcss(),
             node(), cjs(), json(), typescript(),
@@ -113,6 +113,9 @@ exports.default = [
         },
     },
 ];
+if (process.argv.includes('--report')) {
+    rogo_1.report(outDir);
+}
 function getBanner(pkg) {
     return `
 /*!
@@ -120,7 +123,4 @@ function getBanner(pkg) {
  * (c) ${pkg.author}
  * Released under the ${pkg.license} License.
  */`.trim();
-}
-if (process.argv.includes('--report')) {
-    rogo_1.report(outDir);
 }
