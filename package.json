@@ -32,8 +32,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "compile-scripts": "tsc --target ES6 --module CommonJS scripts/build.ts",
-    "build": "rollup -c scripts/build.js & node scripts/build.js --report",
-    "build:docs": "typedoc --inputFiles src/lib-entry.ts --excludeNotExported --excludePrivate --out docs --ignoreCompilerErrors --gaID UA-155723570-4 & echo react-colrow.phphe.com> docs/CNAME"
+    "build": "rollup -c scripts/build.js & node scripts/build.js --report"
   },
   "eslintConfig": {
     "extends": "react-app"
