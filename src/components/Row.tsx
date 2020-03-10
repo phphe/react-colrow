@@ -70,7 +70,7 @@ export default function Row(props: RowProps={}) {
   const updateInnerHeight = () => {
     if (inner.current != null) {
       const el = inner.current! as HTMLElement
-      const h = el.offsetHeight
+      const h = hp.getBoundingClientRect(el).height
       if (h !== innerHeight) {
         setinnerHeight(h)
       } 

@@ -7,7 +7,7 @@ Smarter layout components. Based on css flexbox. Support responsive design, Type
 
 Col's width can be fixed number, percentage or auto grow. Support responsive layout. Row has gutter to set column spacing. This libarary based on css flexbox, not js. So it support ssr(server side render).
 
-I created [vue-colrow](https://github.com/phphe/vue-colrow) first. react-colrow is developed with Typescript, so I don’t want to write a repeat detailed document. If you want know more, you can refer to vue-colrow's documentation.
+I created [vue-colrow](https://vue-colrow.phphe.com) first. react-colrow is developed with Typescript, so I don’t want to write a repeat detailed document. If you want know more, you can refer to vue-colrow's documentation.
 
 ## Usage
 ```js

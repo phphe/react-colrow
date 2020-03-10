@@ -7,7 +7,7 @@ Smarter layout components. Based on css flexbox. Support responsive design, Type
 
 提供Col(列), Row(行), BreakRow(断行)3个布局组件. 其中Col的宽度支持指定数字, 百分比, 自动增长. 支持不同的屏幕宽度设定不一样的列宽. Row可以设置gutter(沟槽, 列间距). 本项目通过css flexbox实现, 而不是js, 所以不用等到组件挂载到DOM, 所以支持ssr(服务端渲染).
 
-我先开发的vue版本的[vue-colrow](https://github.com/phphe/vue-colrow/zh). react-colrow是之后用Typescript开发的. 所以不想再写一个重复的复杂文档. 如果你想了解更多, 可以参考vue-colrow的文档.
+我先开发的vue版本的[vue-colrow](https://vue-colrow.phphe.com/zh). react-colrow是之后用Typescript开发的. 所以不想再写一个重复的复杂文档. 如果你想了解更多, 可以参考vue-colrow的文档.
 
 ## 使用
 ```js

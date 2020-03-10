@@ -1,10 +1,13 @@
 {
   "name": "react-colrow",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A draggable sortable nested vue tree component.",
   "main": "dist/cjs/lib-entry.js",
   "module": "dist/esm/lib-entry.js",
-  "files": ["dist", "types"],
+  "files": [
+    "dist",
+    "types"
+  ],
   "unpkg": "dist/umd-min/lib-entry.js",
   "author": "phphe <phphe@outlook.com> (https://github.com/phphe)",
   "bugs": {
@@ -43,10 +46,22 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
     "react-scripts": "3.4.0",
     "rogo": "^2.0.0",
     "rollup-plugin-postcss": "^2.4.1",
     "rollup-plugin-typescript2": "^0.26.0",
     "typescript": "~3.7.2"
+  },
+  "browserslist": {
+    "production": [
+      "defaults"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

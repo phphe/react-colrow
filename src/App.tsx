@@ -8,7 +8,7 @@ function App() {
   const [total, settotal] = useState(21);
   return (
     <div className="App">
-      <Row style={{background: 'teal'}} className="xxxx">
+      <Row style={{background: 'teal'}}>
         {new Array(total).fill(1).map((n, i) => <Col width={1/5} key={i}>
           <div className="box red"></div>
         </Col>)}
