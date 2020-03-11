@@ -13,7 +13,6 @@ const pkg = require("../package.json")
 // quick config
 const input = 'src/lib-entry.ts'
 const outDir = 'dist'
-const outputName = 'react-colrow' // the built file name is outDir/outputName.format.js
 const moduleName = 'reactColrow' // for umd, amd
 
 const getBabelConfig = () => ({
@@ -47,18 +46,21 @@ const esmBabelConfig = <any>getBabelConfig()
 esmBabelConfig.presets[0][1]['targets'] = {esmodules: true}
 
 const cjsBabelConfig = <any>getBabelConfig()
+cjsBabelConfig.presets[0][1]['targets'] = {node: 6}
 cjsBabelConfig.plugins.push(['module-extension', {mjs: 'js'}]) // replace .mjs to .js
 
 const umdBabelConfig = <any>getBabelConfig()
+umdBabelConfig.presets[0][1]['targets'] = 'defaults' // default browsers, coverage 90%
 
 export default <rollup.RollupOptions[]>[
   // esm
   {
     input,
-    external: (source) => belongsTo(source, Object.keys(pkg.dependencies||{})) || belongsTo(source, Object.keys(pkg.peerdependencies||{})),
+    external: (source) => belongsTo(source, Object.keys(pkg.dependencies||{})) || belongsTo(source, Object.keys(pkg.peerDependencies||{})),
     plugins: [
       postcss(),
-      node(), cjs(), json(),  typescript(),
+      node(), cjs(), json(), 
+      typescript(), // node must be before typescript.
       babel(esmBabelConfig),
     ],
     output: {
@@ -71,11 +73,12 @@ export default <rollup.RollupOptions[]>[
   // cjs
   {
     input,
-    external: (source) => belongsTo(source, Object.keys(pkg.dependencies||{})) || belongsTo(source, Object.keys(pkg.peerdependencies||{})),
+    external: (source) => belongsTo(source, Object.keys(pkg.dependencies||{})) || belongsTo(source, Object.keys(pkg.peerDependencies||{})),
     plugins: [
       postcss(),
-      node(), cjs(), json(), typescript(),
-      babel(cjsBabelConfig),
+      node(), cjs(), json(), 
+      typescript(), // node must be before typescript.
+      babel(cjsBabelConfig), 
     ],
     output: {
       dir: `${outDir}/cjs`,
@@ -84,37 +87,40 @@ export default <rollup.RollupOptions[]>[
       sourcemap: false,
     },
   },
-  // // umd
-  // {
-  //   input,
-  //   external: (source) => belongsTo(source, Object.keys(pkg.peerdependencies||{})),
-  //   plugins: [
-  //     node(), cjs(), json(), typescript(),
-  //     babel(umdBabelConfig),
-  //   ],
-  //   output: {
-  //     dir: `${outDir}/umd`,
-  //     format: 'umd',
-  //     banner: getBanner(pkg),
-  //     sourcemap: false,
-  //     name: moduleName,
-  //   },
-  // },
+  // umd
+  {
+    input,
+    external: (source) => belongsTo(source, Object.keys(pkg.peerDependencies||{})),
+    plugins: [
+      postcss(),
+      node(), cjs(), json(),
+      typescript(), // node must be before typescript.
+      babel(umdBabelConfig),
+    ],
+    output: {
+      dir: `${outDir}/umd`,
+      format: 'umd',
+      banner: getBanner(pkg),
+      sourcemap: false,
+      name: moduleName,
+    },
+  },
   // umd min
   {
     input,
-      external: (source) => belongsTo(source, Object.keys(pkg.peerdependencies||{})),
+    external: (source) => belongsTo(source, Object.keys(pkg.peerDependencies||{})),
     plugins: [
       postcss(),
-      node(), cjs(), json(), typescript(),
+      node(), cjs(), json(),
+      typescript(), // node must be before typescript.
+      babel(umdBabelConfig), 
       terser(), // to minify bundle
-      babel(umdBabelConfig),
     ],
     output: {
       dir: `${outDir}/umd-min`,
       format: 'umd',
       banner: getBanner(pkg),
-      sourcemap: false,
+      sourcemap: true,
       name: moduleName,
     },
   },

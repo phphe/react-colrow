@@ -1,6 +1,6 @@
 {
   "name": "react-colrow",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Smarter react layout components. Based on css flexbox. Support responsive design, Typescript, server side render",
   "main": "dist/cjs/lib-entry.js",
   "module": "dist/esm/lib-entry.js",
