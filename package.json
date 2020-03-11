@@ -49,7 +49,7 @@
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-scripts": "3.4.0",
-    "rogo": "^2.0.0",
+    "rogo": "^2.0.1",
     "rollup-plugin-postcss": "^2.4.1",
     "rollup-plugin-typescript2": "^0.26.0",
     "typescript": "~3.7.2"
