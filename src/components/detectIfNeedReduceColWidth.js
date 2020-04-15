@@ -1,6 +1,6 @@
 // detect if need reduce col width
 // detect browsers, from: https://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browser
-import {isNode} from 'helper-js'
+import {isNode, isWindowDefined} from 'helper-js'
 
 function isFirefox() {
   return typeof InstallTrigger !== 'undefined'
@@ -24,4 +24,4 @@ function isChrome() {
 // }
 // hp.removeEl(div)
 
-export default () => Boolean(!isNode() && !isChrome() && !isSafari() && !isFirefox())
+export default () => Boolean(!isNode() && isWindowDefined() && !isChrome() && !isSafari() && !isFirefox())
