@@ -1,6 +1,6 @@
 {
   "name": "react-colrow",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Smarter react layout components. Based on css flexbox. Support responsive design, Typescript, server side render",
   "main": "dist/cjs/lib-entry.js",
   "module": "dist/esm/lib-entry.js",
@@ -20,7 +20,7 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.8.7",
-    "helper-js": "^1.4.33"
+    "helper-js": "^1.4.36"
   },
   "peerDependencies": {
     "react": "^16.13.0",
@@ -49,7 +49,7 @@
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-scripts": "3.4.0",
-    "rogo": "^2.0.1",
+    "rogo": "^2.0.2",
     "rollup-plugin-postcss": "^2.4.1",
     "rollup-plugin-typescript2": "^0.26.0",
     "typescript": "~3.7.2"

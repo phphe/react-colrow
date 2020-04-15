@@ -1,8 +1,7 @@
 // detect if need reduce col width
 // detect browsers, from: https://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browser
-function isNode() {
-  return typeof module !== 'undefined' && module.exports
-}
+import {isNode} from 'helper-js'
+
 function isFirefox() {
   return typeof InstallTrigger !== 'undefined'
 }

@@ -12,12 +12,13 @@ const pkg = require("../package.json");
 // quick config
 const input = 'src/lib-entry.ts';
 const outDir = 'dist';
-const moduleName = 'reactColrow'; // for umd, amd
+const moduleName = rogo_1.camelize(pkg.name); // for umd, amd
 const getBabelConfig = () => ({
     // .babelrc
     presets: [
         ['@babel/preset-env', {
                 useBuiltIns: false,
+                targets: 'defaults',
             }],
         '@babel/typescript', '@babel/react'
     ],
@@ -40,12 +41,9 @@ const getBabelConfig = () => ({
     babelrc: false,
 });
 const esmBabelConfig = getBabelConfig();
-esmBabelConfig.presets[0][1]['targets'] = { esmodules: true };
 const cjsBabelConfig = getBabelConfig();
-cjsBabelConfig.presets[0][1]['targets'] = { node: 6 };
 cjsBabelConfig.plugins.push(['module-extension', { mjs: 'js' }]); // replace .mjs to .js
 const umdBabelConfig = getBabelConfig();
-umdBabelConfig.presets[0][1]['targets'] = 'defaults'; // default browsers, coverage 90%
 exports.default = [
     // esm
     {
